@@ -37,6 +37,7 @@ type Client struct {
 }
 
 type NewClientOptions struct {
+	HTTPS      bool
 	Username   string
 	Password   string
 	Port       int
@@ -45,7 +46,11 @@ type NewClientOptions struct {
 }
 
 func NewClient(opts *NewClientOptions) *Client {
-	baseURL := fmt.Sprintf("http://%s:%d/api/v2", opts.Host, opts.Port)
+	protocol := "http"
+	if opts.HTTPS {
+		protocol = "https"
+	}
+	baseURL := fmt.Sprintf("%s://%s:%d/api/v2", protocol, opts.Host, opts.Port)
 	client := &http.Client{}
 	return &Client{
 		baseURL:    baseURL,

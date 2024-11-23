@@ -25,10 +25,14 @@ func main() {
 	})
 	
 	err := client.Login()
-	fmt.Printf("failed to login: %v\n", err)
+	if err != nil {
+		fmt.Printf("failed to login: %v\n", err)
+	}
 	
 	err = client.Start()
-	fmt.Printf("failed to start qBittorrent: %v\n", err)
+	if err != nil {
+		fmt.Printf("failed to start qBittorrent: %v\n", err)
+	}
 }
 ```
 
